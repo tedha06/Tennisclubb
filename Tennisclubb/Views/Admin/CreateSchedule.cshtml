@@ -1,0 +1,149 @@
+﻿@{
+    // Hardcoding the coaches' data for now
+    var coaches = new List<dynamic>
+    {
+        new { FullName = "Coach Garen", Biography = "Garen is known for his strength-focused tennis training.", PhotoUrl = Url.Content("~/CoachImages/Garen.png") },
+        new { FullName = "Coach Ornn", Biography = "Ornn specializes in tennis strength and endurance.", PhotoUrl = Url.Content("~/CoachImages/Ornn.png") },
+        new { FullName = "Coach Singed", Biography = "Singed focuses on stamina and advanced tennis techniques.", PhotoUrl = Url.Content("~/CoachImages/Singed.png") },
+        new { FullName = "Coach Draven", Biography = "Draven is an expert in ability-focused tennis training.", PhotoUrl = Url.Content("~/CoachImages/Xayah&Draven.png") },
+        new { FullName = "Coach Xayah", Biography = "Xayah works alongside Draven for tennis ability training.", PhotoUrl = Url.Content("~/CoachImages/Xayah&Draven.png") },
+        new { FullName = "Coach Darius", Biography = "Darius is an expert in advanced tennis techniques.", PhotoUrl = Url.Content("~/CoachImages/Darius.png") }
+    };
+
+    var schedules = new List<dynamic>
+    {
+        new { EventName = "Beginner Tennis", EventDate = "Monday", Coach = "Coach Garen" },
+        new { EventName = "Strength Training", EventDate = "Tuesday", Coach = "Coach Ornn" },
+        new { EventName = "Stamina Training", EventDate = "Wednesday", Coach = "Coach Singed" },
+        new { EventName = "Ability Training", EventDate = "Thursday", Coach = "Coach Xayah & Coach Draven" },
+        new { EventName = "Advanced Tennis", EventDate = "Friday", Coach = "Coach Darius" },
+        new { EventName = "Beginner Competition", EventDate = "Saturday", Coach = "N/A" },
+        new { EventName = "Advanced Competition", EventDate = "Sunday", Coach = "N/A" }
+    };
+}
+
+<h2>Create a New Schedule</h2>
+<form id="scheduleForm">
+    <div>
+        <label>Event Name</label>
+        <input type="text" id="eventName" required />
+    </div>
+    <div>
+        <label>Date</label>
+        <input type="datetime-local" id="eventDate" required />
+    </div>
+    <div>
+        <label>Location</label>
+        <input type="text" id="location" required />
+    </div>
+    <div>
+        <label>Select Coach</label>
+        <select id="coach">
+            @foreach (var coach in coaches)
+            {
+                <option value="@coach.FullName">@coach.FullName</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Create</button>
+</form>
+
+<h2>Weekly Schedules</h2>
+<div id="weeklySchedule">
+    @foreach (var schedule in schedules)
+    {
+        <div>
+            <p><strong>Event Name:</strong> @schedule.EventName</p>
+            <p><strong>Event Date:</strong> @schedule.EventDate</p>
+            <p><strong>Coach:</strong> @schedule.Coach</p>
+        </div>
+    }
+</div>
+
+<!-- JavaScript Section (front-end logic only) -->
+<script>
+    document.getElementById('scheduleForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Gather form data
+        const eventName = document.getElementById('eventName').value;
+        const eventDate = document.getElementById('eventDate').value;
+        const location = document.getElementById('location').value;
+        const coach = document.getElementById('coach').value;
+
+        console.log("Form Submitted with data:", {
+            EventName: eventName,
+            EventDate: eventDate,
+            Location: location,
+            CoachName: coach
+        });
+
+        // Simulate saving the data by dynamically appending it to the weekly schedule
+        const newSchedule = {
+            eventName: eventName,
+            eventDate: eventDate,
+            location: location,
+            coach: coach
+        };
+
+        // Update the schedule list dynamically
+        updateScheduleList(newSchedule);
+    });
+
+    function updateScheduleList(newSchedule) {
+        const weeklyScheduleDiv = document.getElementById('weeklySchedule');
+
+        // Append the new event to the weekly schedule
+        const scheduleItem = `
+                    <div>
+                        <p><strong>Event Name:</strong> ${newSchedule.eventName}</p>
+                        <p><strong>Event Date:</strong> ${newSchedule.eventDate}</p>
+                        <p><strong>Location:</strong> ${newSchedule.location}</p>
+                        <p><strong>Coach:</strong> ${newSchedule.coach}</p>
+                    </div>
+                `;
+        weeklyScheduleDiv.innerHTML += scheduleItem;
+    }
+</script>
+
+<!-- Style Section (unchanged) -->
+<style>
+    form {
+        margin-bottom: 20px;
+    }
+
+        form div {
+            margin-bottom: 10px;
+        }
+
+    label {
+        display: inline-block;
+        width: 150px;
+    }
+
+    input[type="text"], input[type="datetime-local"], select {
+        padding: 8px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    #weeklySchedule div {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+</style>

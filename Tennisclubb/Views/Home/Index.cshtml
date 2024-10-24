@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Tennis Club";
+}
+
+
+<div class="container mt-4">
+    <h1>Welcome to Our Website</h1>
+    <p>We are glad to have you here!</p>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front" style="background-image: url('../../wwwroot/images/Background.png');">
+                        <img src="~/images/Front Staff.png" alt="Staff 1" class="staff-image">
+                        <h3>Ted Ha</h3>
+                        <p>Front Staff</p>
+                    </div>
+                    <div class="flip-card-back" style="background-image: url('/path-to-your-image/Back Staff.png');">
+                        <h2>Ted Ha</h2>
+                        <p>Staff ID: 12345</p>
+                        <p>Phone: 0479121213</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front" style="background-image: url('../../wwwroot/images/Background.png');">
+                        <img src="~/images/Front Staff2.png" alt="Staff 2" class="staff-image">
+                        <h3>An Nguyen</h3>
+                        <p>Front Staff</p>
+                    </div>
+                    <div class="flip-card-back" style="background-image: url('/path-to-your-image/Back Staff.png');">
+                        <h2>An Nguyen</h2>
+                        <p>Staff ID: 54321</p>
+                        <p>Phone: 047123456</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="mt-4">
+    <!-- Direct URL to Member Page -->
+    <a class="btn btn-secondary" href="/Member/Index">Previous (Members)</a>
+
+    <!-- Direct URL to Admin Page -->
+    <a class="btn btn-secondary" href="/Admin/Index">Next (Admins)</a>
+</div>
+
+
+<style>
+    /* General Container Styling */
+    .container {
+        text-align: center;
+    }
+
+    /* Flip Card Structure */
+    .flip-card {
+        background-color: transparent;
+        width: 200px;
+        height: 300px;
+        perspective: 1000px;
+        margin: 0 auto;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: #bbb;
+        color: black;
+    }
+
+    .flip-card-back {
+        background-color: #2980b9;
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+    /* Staff Image Styling */
+    .staff-image {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    /* Row Styling */
+    .row {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>

@@ -1,0 +1,163 @@
+﻿@{
+    // Hardcoding the coaches' data for now
+    var coaches = new List<dynamic>
+    {
+        new { Id = 1, FullName = "Coach Garen", Biography = "Garen is known for his strength-focused tennis training." },
+        new { Id = 2, FullName = "Coach Ornn", Biography = "Ornn specializes in tennis strength and endurance." },
+        new { Id = 3, FullName = "Coach Singed", Biography = "Singed focuses on stamina and advanced tennis techniques." },
+        new { Id = 4, FullName = "Coach Draven", Biography = "Draven is an expert in ability-focused tennis training." },
+        new { Id = 5, FullName = "Coach Xayah", Biography = "Xayah works alongside Draven for tennis ability training." },
+        new { Id = 6, FullName = "Coach Darius", Biography = "Darius is an expert in advanced tennis techniques." }
+    };
+
+    // Hardcoding schedules with no coach assigned initially
+    var schedules = new List<dynamic>
+    {
+        new { Id = 1, EventName = "Beginner Tennis", EventDate = "Monday", Coach = "Coach Garen" },
+        new { Id = 2, EventName = "Strength Training", EventDate = "Tuesday", Coach = "Coach Ornn" },
+        new { Id = 3, EventName = "Stamina Training", EventDate = "Wednesday", Coach = "Coach Singed" },
+        new { Id = 4, EventName = "Ability Training", EventDate = "Thursday", Coach = "Coach Draven" },
+        new { Id = 5, EventName = "Advanced Tennis", EventDate = "Friday", Coach = "Coach Darius" },
+        new { Id = 6, EventName = "Beginner Competition", EventDate = "Saturday", Coach = "Not Assigned" },
+        new { Id = 7, EventName = "Advanced Competition", EventDate = "Sunday", Coach = "Not Assigned" }
+    };
+}
+
+<h2>Match Coach with Schedule</h2>
+
+<!-- Form to select a schedule and a coach -->
+<div>
+    <label>Select Schedule</label>
+    <select id="scheduleSelect">
+        @foreach (var schedule in schedules)
+        {
+            <option value="@schedule.Id">@schedule.EventName - @schedule.EventDate</option>
+        }
+    </select>
+</div>
+
+<div>
+    <label>Select Coach</label>
+    <select id="coachSelect">
+        @foreach (var coach in coaches)
+        {
+            <option value="@coach.Id">@coach.FullName</option>
+        }
+    </select>
+</div>
+
+<button id="matchButton">Match Coach</button>
+
+<!-- Display the matched schedule and coach confirmation -->
+<div id="matchedEvent" style="margin-top: 20px;">
+    <h4>Matched Event:</h4>
+    <p id="matchedDetails"></p>
+</div>
+
+<!-- Display the entire schedule list -->
+<h2>Weekly Schedules</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Coach</th>
+        </tr>
+    </thead>
+    <tbody id="scheduleTable">
+        @foreach (var schedule in schedules)
+        {
+            <tr>
+                <td>@schedule.EventName</td>
+                <td>@schedule.EventDate</td>
+                <td id="coach-@schedule.Id">@schedule.Coach</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Add JavaScript to handle the matching logic -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add event listener for the "Match Coach" button
+        document.getElementById('matchButton').addEventListener('click', function () {
+            var selectedScheduleId = document.getElementById('scheduleSelect').value;
+            var selectedCoachId = document.getElementById('coachSelect').value;
+
+            // Hardcoded coach and schedule details
+            var coaches = [
+                { Id: 1, FullName: "Coach Garen" },
+                { Id: 2, FullName: "Coach Ornn" },
+                { Id: 3, FullName: "Coach Singed" },
+                { Id: 4, FullName: "Coach Draven" },
+                { Id: 5, FullName: "Coach Xayah" },
+                { Id: 6, FullName: "Coach Darius" }
+            ];
+
+            var schedules = [
+                { Id: 1, EventName: "Beginner Tennis", EventDate: "Monday", CoachId: 1 }, // Matches Coach Garen
+                { Id: 2, EventName: "Strength Training", EventDate: "Tuesday", CoachId: 2 }, // Matches Coach Ornn
+                { Id: 3, EventName: "Stamina Training", EventDate: "Wednesday", CoachId: 3 }, // Matches Coach Singed
+                { Id: 4, EventName: "Ability Training", EventDate: "Thursday", CoachId: 4 }, // Matches Coach Draven
+                { Id: 5, EventName: "Advanced Tennis", EventDate: "Friday", CoachId: 6 }, // Matches Coach Darius
+                { Id: 6, EventName: "Beginner Competition", EventDate: "Saturday", CoachId: null }, // Not Assigned
+                { Id: 7, EventName: "Advanced Competition", EventDate: "Sunday", CoachId: null } // Not Assigned
+            ];
+
+            // Find the selected schedule and coach
+            var selectedCoach = coaches.find(c => c.Id == selectedCoachId);
+            var selectedSchedule = schedules.find(s => s.Id == selectedScheduleId);
+
+            // Check if the coach matches the schedule
+            if (selectedSchedule.CoachId == selectedCoach.Id) {
+                // Update the displayed schedule table with the matched coach
+                document.getElementById('coach-' + selectedScheduleId).innerText = selectedCoach.FullName;
+
+                // Show matched event details in confirmation section
+                document.getElementById('matchedDetails').innerText = selectedSchedule.EventName + " - " + selectedCoach.FullName;
+            } else {
+                alert('This coach does not match the selected schedule. Please choose the correct coach.');
+            }
+        });
+    });
+</script>
+
+<!-- Add some styles for form and table -->
+<style>
+    form {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    .confirmation-box {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background-color: #f4f4f4;
+    }
+</style>

@@ -1,0 +1,91 @@
+﻿@{
+    // Hardcoding the coaches' data with nationality included
+    var coaches = new List<dynamic>
+    {
+        new { FullName = "Coach Garen", Biography = "Garen is known for his strength-focused tennis training.", PhotoUrl = Url.Content("~/CoachImages/Garen.png"), Nationality = "Demacia" },
+        new { FullName = "Coach Ornn", Biography = "Ornn specializes in tennis strength and endurance.", PhotoUrl = Url.Content("~/CoachImages/Ornn.png"), Nationality = "Freljord" },
+        new { FullName = "Coach Singed", Biography = "Singed focuses on stamina and advanced tennis techniques.", PhotoUrl = Url.Content("~/CoachImages/Singed.png"), Nationality = "Zaun" },
+        new { FullName = "Coach Draven", Biography = "Draven is an expert in ability-focused tennis training.", PhotoUrl = Url.Content("~/CoachImages/Xayah&Draven.png"), Nationality = "Noxus" },
+        new { FullName = "Coach Xayah", Biography = "Xayah works alongside Draven for tennis ability training.", PhotoUrl = Url.Content("~/CoachImages/Xayah&Draven.png"), Nationality = "Ionia" },
+        new { FullName = "Coach Darius", Biography = "Darius is an expert in advanced tennis techniques.", PhotoUrl = Url.Content("~/CoachImages/Darius.png"), Nationality = "Noxus" }
+    };
+}
+
+<h2>Coaches</h2>
+
+<div class="card-container">
+    @foreach (var coach in coaches)
+    {
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <!-- Front of the card using background image -->
+                <div class="flip-card-front" style="background-image: url('@coach.PhotoUrl'); background-size: cover; background-position: center;">
+                    <h3>@coach.FullName</h3>
+                </div>
+                <!-- Back of the card -->
+                <div class="flip-card-back">
+                    <h3>@coach.FullName</h3>
+                    <a href="/Coach/ViewProfile">View Profile</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Style the card -->
+<style>
+    .card-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 400px;
+        perspective: 1000px; /* Perspective effect */
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .flip-card-front {
+        background-color: #fff;
+        color: white;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 15px;
+        font-size: 1.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .flip-card-back {
+        background-color: #fff;
+        color: black;
+        transform: rotateY(180deg);
+        padding: 20px;
+    }
+</style>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Tennisclubb.Models.Schedule>
+
+<h2>Upcoming Schedules</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model)
+        {
+            <tr>
+                <td>@schedule.EventName</td>
+                <td>@schedule.EventDate.ToString("yyyy-MM-dd")</td>
+                <td>@schedule.Location</td>
+            </tr>
+        }
+    </tbody>
+</table>

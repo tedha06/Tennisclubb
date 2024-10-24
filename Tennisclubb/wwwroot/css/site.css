@@ -1,0 +1,51 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-image: url("../images/Background.png"); /* Add the correct path to your uploaded image */
+    background-size: cover; /* Ensure the image covers the entire page */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
+    color: white; /* Make the text white to stand out */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* 0.8 means 80% opaque and 20% transparent */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Keep the shadow for some depth */
+    color: black; /* Keep text black for readability */
+}
+
+h1, h2, h3, p {
+    color: white; /* Ensure headings and paragraphs stand out */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add text shadow for better readability */
+}
+
+h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Extra shadow for large headings */
+}
+
+p {
+    color: rgba(255, 255, 255, 0.9); /* Light white text for better readability */
+}
